@@ -1,0 +1,33 @@
+# Core Libraries
+numpy
+pandas
+pyyaml
+scikit-learn
+matplotlib
+optuna
+
+# Gradient Boosting Models
+lightgbm
+xgboost
+catboost
+
+# Geospatial
+geopandas
+rasterio
+pyproj
+shapely
+fiona
+pyogrio
+
+# Visualization
+streamlit
+pydeck
+altair
+
+# I/O
+pyarrow
+fastparquet
+
+# Utility
+tqdm
+joblib
