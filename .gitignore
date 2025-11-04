@@ -1,0 +1,22 @@
+# Ignore raster datasets
+data/*.tif
+data/*.tiff
+
+# Model and cache files
+models/*.bin
+models/*.txt
+*.parquet
+*.log
+*.pkl
+*.tmp
+__pycache__/
+
+# Streamlit cache and compiled files
+.streamlit/
+*.pyc
+*.pyo
+*.DS_Store
+
+# VSCode / IDE
+.vscode/
+.idea/
