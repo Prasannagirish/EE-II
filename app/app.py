@@ -228,7 +228,6 @@ with tabs[0]:
     s4.metric("Trained Model",   "✅" if (_exists(MODEL_BIN) or _exists(MODEL_TXT)) else "❌")
 
 # ---------- TAB 2: MAP & RANKINGS ----------
-# --- TAB 2: MAP & RANKINGS ---
 with tabs[1]:
     st.subheader("🗺️ Solar Suitability Map")
 
@@ -287,7 +286,6 @@ with tabs[1]:
             get_color="[0, 255, 255, 255]",  # cyan highlight
             get_radius=250,
             pickable=True,
-            tooltip=True,
         )
         label_layer = pdk.Layer(
             "TextLayer",
@@ -308,18 +306,13 @@ with tabs[1]:
         pitch=0,
     )
 
-    deck = pdk.Deck(
-    layers=layers,
-    initial_view_state=view_state,
-    tooltip={"text": "{name}\nLanduse: {landuse}\nScore: {" + score_col + "}"},
-)
-
     st.pydeck_chart(pdk.Deck(
         layers=layers,
         initial_view_state=view_state,
         tooltip={"text": "{name}\nLanduse: {landuse}\nScore: {" + score_col + "}"}
     ))
 
+    # --- Legend ---
     st.markdown("""
     <div style="
         position: relative;
@@ -346,16 +339,16 @@ with tabs[1]:
     </div>
     """, unsafe_allow_html=True)
 
-    # --- Table: Top 10 Sites ---
-    st.markdown("### 📋 Top 10 Most Suitable Parcels")
+    # --- Table: Top 10 Sites with Coordinates ---
+    st.markdown("### 📋 Top 10 Most Suitable Parcels (with Coordinates)")
     rename_map = {}
     if ghi_col: rename_map[ghi_col] = "Solar Irradiance (W/m²)"
     if slope_col: rename_map[slope_col] = "Average Slope (°)"
     rename_map[score_col] = "AI Suitability Score"
     pretty = gdf.rename(columns=rename_map)
 
-    cols_to_display = ["parcel_id"]
-    for c in ["name", "landuse", "Solar Irradiance (W/m²)", "Average Slope (°)", "AI Suitability Score"]:
+    cols_to_display = ["parcel_id", "name", "landuse", "lat", "lon"]
+    for c in ["Solar Irradiance (W/m²)", "Average Slope (°)", "AI Suitability Score"]:
         if c in pretty.columns:
             cols_to_display.append(c)
     cols_to_display = list(dict.fromkeys(cols_to_display))
@@ -363,12 +356,12 @@ with tabs[1]:
     top_sites = pretty.sort_values("AI Suitability Score", ascending=False).head(10)
     st.dataframe(top_sites[cols_to_display], use_container_width=True)
 
-    # --- Download Button ---
+    # --- Download Button (with lat/lon) ---
     csv_data = top_sites[cols_to_display].to_csv(index=False).encode("utf-8")
     st.download_button(
-        "⬇️ Download Top 10 CSV",
+        "⬇️ Download Top 10 Sites with Coordinates (CSV)",
         data=csv_data,
-        file_name="top10_sites.csv",
+        file_name="top10_sites_with_coordinates.csv",
         mime="text/csv"
     )
 
@@ -378,6 +371,7 @@ with tabs[1]:
             f"Highlighted {len(top10)} top-performing parcels directly on the map "
             f"({', '.join(top10_names[:5])}{'...' if len(top10_names) > 5 else ''})."
         )
+
 # ---------- TAB 3: MODEL COMPARISON ----------
 with tabs[2]:
     st.header("📊 Model Comparison & Optimization")
