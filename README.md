@@ -42,8 +42,6 @@ The project integrates **LightGBM, XGBoost, CatBoost, and RandomForest** models 
 | XGBoost | `xgboost` | Tree boosting with GPU support |
 | CatBoost | `catboost` | Efficient categorical boosting |
 | RandomForest | `scikit-learn` | Ensemble baseline |
-| Ridge | `scikit-learn` | Linear regression baseline |
-| MLPRegressor | `scikit-learn` | Neural network baseline |
 
 Each model is evaluated on **RMSE**, **MAE**, and **R²** — best model auto-updates `config.yaml`.
 
