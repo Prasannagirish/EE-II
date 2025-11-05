@@ -94,13 +94,6 @@ def get_models():
             n_jobs=-1,
             random_state=42
         ),
-        "Ridge": Ridge(alpha=1.0),
-        "NeuralNet": MLPRegressor(
-            hidden_layer_sizes=(128, 64),
-            learning_rate_init=0.001,
-            max_iter=300,
-            random_state=42
-        ),
     }
 
 # ===============================

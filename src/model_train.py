@@ -98,7 +98,6 @@ else:
     base_params.update({"device_type": "cpu"})
 
 # -------------------------
-# Optuna tuning (optional but recommended)
 # -------------------------
 def train_eval(params):
     callbacks = [lgb.early_stopping(stopping_rounds=30), lgb.log_evaluation(20)]

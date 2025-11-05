@@ -1,12 +1,12 @@
 📂 Loading feature dataset...
 
 ⚙️ Training LightGBM ...
-[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000478 seconds.
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000440 seconds.
 You can set `force_row_wise=true` to remove the overhead.
 And if memory is not enough, you can set `force_col_wise=true`.
-[LightGBM] [Info] Total Bins 838
-[LightGBM] [Info] Number of data points in the train set: 364, number of used features: 14
-[LightGBM] [Info] Start training from score 0.106149
+[LightGBM] [Info] Total Bins 858
+[LightGBM] [Info] Number of data points in the train set: 364, number of used features: 15
+[LightGBM] [Info] Start training from score 0.332061
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
@@ -507,23 +507,17 @@ And if memory is not enough, you can set `force_col_wise=true`.
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
 [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
-✅ LightGBM: RMSE=0.0284, MAE=0.0149, R²=0.9861
+✅ LightGBM: RMSE=0.0139, MAE=0.0081, R²=0.9824
 
 ⚙️ Training XGBoost ...
-✅ XGBoost: RMSE=0.0197, MAE=0.0069, R²=0.9933
+✅ XGBoost: RMSE=0.0113, MAE=0.0062, R²=0.9885
 
 ⚙️ Training CatBoost ...
-✅ CatBoost: RMSE=0.0319, MAE=0.0123, R²=0.9824
+✅ CatBoost: RMSE=0.0206, MAE=0.0077, R²=0.9617
 
 ⚙️ Training RandomForest ...
-✅ RandomForest: RMSE=0.0182, MAE=0.0060, R²=0.9943
+✅ RandomForest: RMSE=0.0120, MAE=0.0047, R²=0.9870
 
-⚙️ Training Ridge ...
-✅ Ridge: RMSE=0.0815, MAE=0.0464, R²=0.8851
-
-⚙️ Training NeuralNet ...
-✅ NeuralNet: RMSE=0.5993, MAE=0.4516, R²=-5.2099
-
-🏁 Model comparison complete! Best model → RandomForest
+🏁 Model comparison complete! Best model → XGBoost
 📊 Results saved to: /Users/girish/cs101/projects/ee/EE-II/src/../data/model_comparison.csv
-✅ Updated config.yaml with best model: RandomForest
+✅ Updated config.yaml with best model: XGBoost

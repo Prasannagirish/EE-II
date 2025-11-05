@@ -5,6 +5,7 @@ import pydeck as pdk
 import numpy as np
 import os, sys, subprocess, json, yaml
 from shapely.geometry import Point
+import plotly.express as px
 
 # ---------- PATHS ----------
 BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
@@ -307,13 +308,43 @@ with tabs[1]:
         pitch=0,
     )
 
+    deck = pdk.Deck(
+    layers=layers,
+    initial_view_state=view_state,
+    tooltip={"text": "{name}\nLanduse: {landuse}\nScore: {" + score_col + "}"},
+)
+
     st.pydeck_chart(pdk.Deck(
         layers=layers,
         initial_view_state=view_state,
-        tooltip={
-            "text": "{name}\nLanduse: {landuse}\nScore: {" + score_col + "}"
-        }
+        tooltip={"text": "{name}\nLanduse: {landuse}\nScore: {" + score_col + "}"}
     ))
+
+    st.markdown("""
+    <div style="
+        position: relative;
+        top: -60px;
+        left: 15px;
+        background: rgba(25,25,25,0.7);
+        padding: 8px 12px;
+        border-radius: 8px;
+        width: 240px;
+        color: white;
+        font-size: 12px;
+        border: 1px solid rgba(255,255,255,0.2);
+    ">
+        <b>Suitability Score</b><br>
+        <div style="background: linear-gradient(to right, red, yellow, green);
+                    height: 10px; border-radius: 5px; margin-top: 4px; margin-bottom: 4px;"></div>
+        <div style="display: flex; justify-content: space-between;">
+            <span>Low</span><span>Medium</span><span>High</span>
+        </div>
+        <div style="margin-top: 6px; display: flex; align-items: center;">
+            <div style="width: 12px; height: 12px; background: rgb(0,255,255); border-radius: 50%; margin-right: 5px;"></div>
+                Top 10 Highlight
+            </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # --- Table: Top 10 Sites ---
     st.markdown("### 📋 Top 10 Most Suitable Parcels")
@@ -362,7 +393,6 @@ with tabs[2]:
         if st.button("🔧 Retrain Using Best Model (model_train.py)", use_container_width=True):
             out = run_script("model_train.py")
             st.success("✅ Retraining complete.")
-            st.text(out[-1500:])
 
     st.markdown("---")
     if _exists(MODEL_COMPARISON):
@@ -375,7 +405,9 @@ with tabs[2]:
             use_container_width=True
         )
         try:
-            st.bar_chart(df.set_index("Model")[["RMSE", "MAE", "R2"]])
+            df_melted = df.melt(id_vars="Model", value_vars=["RMSE", "MAE", "R2"], var_name="Metric", value_name="Value")
+            fig = px.bar(df_melted, x="Model", y="Value", color="Metric", barmode="group", title="Model Performance Comparison")
+            st.plotly_chart(fig, use_container_width=True)
         except Exception:
             pass
 
