@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-11-05T13:30:27.952169Z",
+  "device_type": "cpu",
+  "best_params": {
+    "objective": "regression",
+    "metric": "rmse",
+    "learning_rate": 0.11158363539573636,
+    "num_leaves": 196,
+    "feature_fraction": 0.9239244961167185,
+    "bagging_fraction": 0.8125826724691866,
+    "bagging_freq": 1,
+    "min_data_in_leaf": 10,
+    "lambda_l1": 0.06105588744958923,
+    "lambda_l2": 4.531725374825552,
+    "num_threads": -1,
+    "verbosity": -1,
+    "device_type": "cpu"
+  },
+  "val_rmse": 0.03437682707716038,
+  "n_features": 14
+}
