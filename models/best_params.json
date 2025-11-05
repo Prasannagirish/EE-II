@@ -1,21 +1,21 @@
 {
-  "timestamp": "2025-11-04T14:57:12.567522Z",
+  "timestamp": "2025-11-05T11:29:19.101219Z",
   "device_type": "cpu",
   "best_params": {
     "objective": "regression",
     "metric": "rmse",
-    "learning_rate": 0.03332990317626071,
-    "num_leaves": 83,
-    "feature_fraction": 0.9011750091916975,
-    "bagging_fraction": 0.8081700504347858,
+    "learning_rate": 0.055360955981558276,
+    "num_leaves": 151,
+    "feature_fraction": 0.8297831545284975,
+    "bagging_fraction": 0.7867987000553642,
     "bagging_freq": 1,
-    "min_data_in_leaf": 38,
-    "lambda_l1": 2.0606330031536224e-05,
-    "lambda_l2": 0.06357213504107362,
+    "min_data_in_leaf": 11,
+    "lambda_l1": 0.2545575163670798,
+    "lambda_l2": 1.388467836550624,
     "num_threads": -1,
     "verbosity": -1,
     "device_type": "cpu"
   },
-  "val_rmse": 0.0339590122274993,
+  "val_rmse": 0.04213476415914239,
   "n_features": 14
 }
